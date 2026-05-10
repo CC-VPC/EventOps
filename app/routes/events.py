@@ -21,7 +21,8 @@ def _validate_object_id(id: str) -> ObjectId:
     """
     try:
         return ObjectId(id)
-    except (InvalidId, Exception):
+    except (InvalidId, Exception) as e:
+        logger.warning(f"Invalid ObjectId format encountered: {id} - {e}")
         raise HTTPException(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail=f"'{id}' is not a valid event ID",
@@ -31,14 +32,21 @@ def _validate_object_id(id: str) -> ObjectId:
 async def _get_or_404(id: str) -> dict:
     """Fetch event by ID or raise 404."""
     oid = _validate_object_id(id)
-    collection = get_events_collection()
-    doc = await collection.find_one({"_id": oid})
-    if not doc:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Event with id '{id}' not found",
-        )
-    return doc
+    
+    try:
+        collection = get_events_collection()
+        doc = await collection.find_one({"_id": oid})
+        if not doc:
+            logger.warning(f"Event not found for id: {id}")
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Event with id '{id}' not found",
+            )
+        return doc
+    except Exception as e:
+        if not isinstance(e, HTTPException):
+            logger.error(f"Database error while fetching event {id}: {e}", exc_info=True)
+        raise e
 
 
 # ── Routes ────────────────────────────────────────────────────────────────────
@@ -96,11 +104,18 @@ async def create_event(payload: EventCreate):
         "updated_at": now,
     }
 
-    result = await collection.insert_one(doc)
-    created = await collection.find_one({"_id": result.inserted_id})
+    try:
+        result = await collection.insert_one(doc)
+        created = await collection.find_one({"_id": result.inserted_id})
 
-    logger.info(f"Event created: {result.inserted_id} — '{payload.title}'")
-    return EventOut.from_mongo(created)
+        logger.info(f"Event created: {result.inserted_id} — '{payload.title}'")
+        return EventOut.from_mongo(created)
+    except Exception as e:
+        logger.error(f"Error creating event: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to create event"
+        )
 
 
 @router.put(

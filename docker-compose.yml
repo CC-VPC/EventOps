@@ -7,6 +7,8 @@ services:
     container_name: eventapp
     ports:
       - "8000:8000"
+    volumes:
+      - .:/app
     environment:
       APP_VERSION: "v1"
       BUILD_NUMBER: "0"
