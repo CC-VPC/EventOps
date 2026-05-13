@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% set active_page = 'events' %}
+
+{% block title %}Global Tech Summit 2026 - EventOps{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="/events" class="btn-link"><i data-lucide="arrow-left"></i> Back to Events</a>
+</div>
+
+<div class="event-hero">
+    <div class="event-hero-content">
+        <span class="badge badge-primary">Technology</span>
+        <h1 class="hero-title">Global Tech Summit 2026</h1>
+        <p class="hero-subtitle">The premier gathering of innovators, engineers, and tech leaders from around the world.</p>
+        
+        <div class="hero-meta">
+            <div class="meta-item">
+                <div class="meta-icon"><i data-lucide="calendar"></i></div>
+                <div>
+                    <strong>May 15 - 17, 2026</strong>
+                    <span>09:00 AM - 05:00 PM PST</span>
+                </div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-icon"><i data-lucide="map-pin"></i></div>
+                <div>
+                    <strong>Moscone Center</strong>
+                    <span>San Francisco, CA</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="event-details-layout">
+    <div class="event-main-info">
+        <section class="detail-section card">
+            <div class="card-body">
+                <h2>About this event</h2>
+                <p>Join us for three days of inspiring keynotes, deep-dive technical sessions, and networking with the brightest minds in technology. The Global Tech Summit 2026 will cover the latest advancements in artificial intelligence, cloud computing, cybersecurity, and sustainable tech.</p>
+                <p>Whether you're a seasoned professional or just starting your journey, you'll find sessions tailored to your experience level and interests.</p>
+            </div>
+        </section>
+        
+        <section class="detail-section card mt-4">
+            <div class="card-body">
+                <h2>Agenda Highlights</h2>
+                <ul class="agenda-list">
+                    <li>
+                        <span class="time">09:00 AM</span>
+                        <div class="details">
+                            <h4>Opening Keynote: The Future of Compute</h4>
+                            <p>Dr. Sarah Jenkins</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="time">11:00 AM</span>
+                        <div class="details">
+                            <h4>Building Resilient Distributed Systems</h4>
+                            <p>Technical Track</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="time">02:00 PM</span>
+                        <div class="details">
+                            <h4>AI Integration Workshop</h4>
+                            <p>Hands-on Lab</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    
+    <div class="event-sidebar-info">
+        <div class="card ticket-card">
+            <div class="card-body">
+                <h3>Registration</h3>
+                <div class="price-tier">
+                    <div>
+                        <h4>General Admission</h4>
+                        <p class="text-sm text-muted">Access to all keynotes and tracks.</p>
+                    </div>
+                    <span class="price">$299</span>
+                </div>
+                <button class="btn btn-primary btn-block mt-4">Register Now</button>
+            </div>
+        </div>
+        
+        <div class="card organizer-card mt-4">
+            <div class="card-body">
+                <h3>Organized by</h3>
+                <div class="organizer-info mt-3">
+                    <div class="org-avatar">TO</div>
+                    <div>
+                        <h4>TechOps International</h4>
+                        <a href="#" class="btn-link text-sm">Contact Organizer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

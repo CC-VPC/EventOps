@@ -11,6 +11,7 @@ from fastapi.staticfiles import StaticFiles
 from app.database import ping_db
 from app.routes.devops import router as devops_router
 from app.routes.events import router as events_router
+from app.routes.frontend import router as frontend_router
 from config import APP_VERSION, BUILD_NUMBER, ENVIRONMENT
 
 # ── Logging — JSON to stdout (required for container log collection) ───────────
@@ -92,6 +93,7 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 app.include_router(devops_router)   # /health /ready /version /load
 app.include_router(events_router)   # /api/events CRUD
+app.include_router(frontend_router) # Frontend routes
 
 
 # ── Static files (frontend) ───────────────────────────────────────────────────

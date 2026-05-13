@@ -37,8 +37,9 @@ async def ping_db() -> bool:
     """
     global _connected
     try:
-        await get_client().admin.command("ping")
+        client = await get_client().admin.command("ping")
         _connected = True
+        logger.info(f"MongoDB ping failed: {client}")
         return True
     except (ConnectionFailure, ServerSelectionTimeoutError) as e:
         _connected = False

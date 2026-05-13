@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% set active_page = 'events' %}
+
+{% block title %}Events - EventOps{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1 class="page-title">All Events</h1>
+        <p class="page-subtitle">Manage and track your upcoming and past events.</p>
+    </div>
+    <div class="header-actions">
+        <div class="filter-group hide-mobile">
+            <button class="btn btn-outline active">Upcoming</button>
+            <button class="btn btn-outline">Past</button>
+            <button class="btn btn-outline">Drafts</button>
+        </div>
+        <button class="btn btn-primary">
+            <i data-lucide="plus"></i> New Event
+        </button>
+    </div>
+</div>
+
+<div class="events-grid">
+    <!-- Event Card 1 -->
+    <a href="/event/1" class="event-card">
+        <div class="event-image">
+            <div class="event-category">Technology</div>
+            <!-- Using a solid subtle color gradient instead of an image for clean look -->
+            <div class="placeholder-img" style="background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%); height: 160px;"></div>
+        </div>
+        <div class="event-card-content">
+            <h3 class="event-title">Global Tech Summit 2026</h3>
+            <div class="event-meta">
+                <span><i data-lucide="calendar"></i> May 15, 2026</span>
+                <span><i data-lucide="map-pin"></i> San Francisco, CA</span>
+            </div>
+            <div class="event-footer">
+                <div class="attendee-avatars">
+                    <img src="https://ui-avatars.com/api/?name=A&background=random" alt="A">
+                    <img src="https://ui-avatars.com/api/?name=B&background=random" alt="B">
+                    <span class="more-attendees">+450</span>
+                </div>
+                <span class="event-price">$299</span>
+            </div>
+        </div>
+    </a>
+    
+    <!-- Event Card 2 -->
+    <a href="/event/1" class="event-card">
+        <div class="event-image">
+            <div class="event-category">Design</div>
+            <div class="placeholder-img" style="background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%); height: 160px;"></div>
+        </div>
+        <div class="event-card-content">
+            <h3 class="event-title">Design Leadership Conference</h3>
+            <div class="event-meta">
+                <span><i data-lucide="calendar"></i> June 02, 2026</span>
+                <span><i data-lucide="video"></i> Virtual Event</span>
+            </div>
+            <div class="event-footer">
+                <div class="attendee-avatars">
+                    <img src="https://ui-avatars.com/api/?name=C&background=random" alt="C">
+                    <img src="https://ui-avatars.com/api/?name=D&background=random" alt="D">
+                    <span class="more-attendees">+820</span>
+                </div>
+                <span class="event-price">Free</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- Event Card 3 -->
+    <a href="/event/1" class="event-card">
+        <div class="event-image">
+            <div class="event-category">Business</div>
+            <div class="placeholder-img" style="background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); height: 160px;"></div>
+        </div>
+        <div class="event-card-content">
+            <h3 class="event-title">Startup Founders Meetup</h3>
+            <div class="event-meta">
+                <span><i data-lucide="calendar"></i> July 10, 2026</span>
+                <span><i data-lucide="map-pin"></i> New York, NY</span>
+            </div>
+            <div class="event-footer">
+                <div class="attendee-avatars">
+                    <img src="https://ui-avatars.com/api/?name=X&background=random" alt="X">
+                    <img src="https://ui-avatars.com/api/?name=Y&background=random" alt="Y">
+                    <span class="more-attendees">+120</span>
+                </div>
+                <span class="event-price">$50</span>
+            </div>
+        </div>
+    </a>
+</div>
+{% endblock %}
