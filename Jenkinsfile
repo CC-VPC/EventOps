@@ -14,7 +14,7 @@ pipeline{
         }
         stage("Run app"){
             steps{
-                echo "Running... demo event-ops..."
+                sh 'python3 app.py'
             }
         }
 
