@@ -1,21 +1,52 @@
-pipeline{
+pipeline {
     agent any
 
-    stages{
-        stage("Build"){
-            steps{
-                echo "Building demo event-ops..."
+    stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
             }
         }
-        stage("Test"){
-            steps{
-                echo "Testing demo event-ops..."
+
+        stage('Setup Environment') {
+            steps {
+                echo 'Creating virtual environment...'
+
+                sh '''
+                python3 -m venv venv
+
+                . venv/bin/activate
+
+                pip install --upgrade pip
+
+                pip install -r requirements.txt
+                '''
             }
         }
-        stage("Run app"){
-            steps{
-                sh 'python3 app.py'
+
+        stage('Run Tests') {
+            steps {
+                echo 'Running pytest...'
+
+                sh '''
+                . venv/bin/activate
+
+                pytest
+                '''
             }
+        }
+
+    }
+
+    post {
+
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+
+        failure {
+            echo 'Pipeline failed!'
         }
 
     }
