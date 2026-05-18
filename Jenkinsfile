@@ -11,7 +11,7 @@ pipeline {
 
         stage('Setup Environment') {
             steps {
-                echo 'Creating virtual environment...'
+                echo '1. Creating virtual environment...'
 
                 sh '''
                 python3 -m venv venv
