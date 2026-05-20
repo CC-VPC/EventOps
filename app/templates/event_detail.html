@@ -123,7 +123,30 @@
                         <i data-lucide="info"></i>
                         <span id="d-seats-text"></span>
                     </div>
-                    <button class="btn btn-primary btn-block mt-4">Register Now</button>
+                    <button id="register-btn" class="btn btn-primary btn-block mt-4">Register Now</button>
+                </div>
+            </div>
+
+            <!-- QR Code Registration Modal -->
+            <div id="register-modal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
+                <div class="modal-card" style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 20px; max-width: 400px; width: 90%; padding: 32px; box-shadow: var(--shadow-lg); text-align: center; transform: scale(0.9); transition: transform 0.3s ease;">
+                    <div style="display: flex; justify-content: flex-end; margin-top: -16px; margin-right: -16px;">
+                        <button id="modal-close-btn" class="icon-btn" style="border: none; background: none; cursor: pointer; color: var(--text-muted); padding: 4px;">
+                            <i data-lucide="x"></i>
+                        </button>
+                    </div>
+                    <div class="state-icon" style="background-color: var(--primary-light); color: var(--primary); margin: 0 auto 20px auto;">
+                        <i data-lucide="qr-code" style="width: 32px; height: 32px;"></i>
+                    </div>
+                    <h3 style="font-size: 1.4rem; font-weight: 700; color: var(--secondary); margin-bottom: 8px;">Register for Event</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Scan the QR code below on your mobile device to complete your registration.</p>
+                    
+                    <div id="qrcode-container" style="background: white; padding: 16px; border-radius: 12px; display: inline-block; box-shadow: var(--shadow-sm); margin-bottom: 24px; border: 1px solid var(--border-color);">
+                        <img id="qrcode-img" src="" alt="Registration QR Code" style="width: 200px; height: 200px; display: block;" />
+                    </div>
+                    
+                    <div style="font-size: 0.8rem; color: var(--text-muted); background: var(--bg-main); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); word-break: break-all;" id="modal-url-text">
+                    </div>
                 </div>
             </div>
 
@@ -245,6 +268,48 @@
                 error.style.display  = 'flex';
             });
     }
+
+    // Modal click and close setup
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('register-modal');
+        const registerBtn = document.getElementById('register-btn');
+        const closeBtn = document.getElementById('modal-close-btn');
+
+        if (registerBtn && modal) {
+            registerBtn.addEventListener('click', () => {
+                const modalImg = document.getElementById('qrcode-img');
+                const modalUrl = document.getElementById('modal-url-text');
+                
+                // Construct register URL
+                const regUrl = window.location.href + '/register';
+                modalImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(regUrl)}`;
+                modalUrl.textContent = regUrl;
+
+                // Show modal with animation
+                modal.style.display = 'flex';
+                setTimeout(() => {
+                    modal.style.opacity = '1';
+                    modal.querySelector('.modal-card').style.transform = 'scale(1)';
+                }, 10);
+            });
+        }
+
+        if (closeBtn && modal) {
+            closeBtn.addEventListener('click', () => {
+                modal.style.opacity = '0';
+                modal.querySelector('.modal-card').style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 300);
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeBtn.click();
+                }
+            });
+        }
+    });
 
     loadEventDetail();
 </script>

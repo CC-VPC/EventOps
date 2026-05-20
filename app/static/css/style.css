@@ -1027,3 +1027,266 @@ ul {
         font-size: 2rem;
     }
 }
+
+/* ===== Status badges (card overlay) ===== */
+.event-status-badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status-upcoming {
+    background-color: var(--success-light);
+    color: var(--success);
+}
+
+.status-past {
+    background-color: #f1f5f9;
+    color: #94a3b8;
+}
+
+/* ===== Skeleton Loader ===== */
+@keyframes shimmer {
+    0%   { background-position: -400px 0; }
+    100% { background-position: 400px 0; }
+}
+
+.skeleton-line,
+.skeleton-img,
+.skeleton-hero {
+    background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+    background-size: 800px 100%;
+    animation: shimmer 1.4s infinite linear;
+    border-radius: 6px;
+}
+
+.skeleton-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.skeleton-card {
+    background-color: var(--bg-surface);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.skeleton-img {
+    height: 160px;
+    border-radius: 0;
+}
+
+.skeleton-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.skeleton-line         { height: 14px; }
+.skeleton-line.w-3-4   { width: 75%; }
+.skeleton-line.w-1-2   { width: 50%; }
+.skeleton-line.w-1-3   { width: 33%; }
+.skeleton-line.w-1-4   { width: 25%; }
+
+.skeleton-hero {
+    background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+    background-size: 800px 100%;
+    animation: shimmer 1.4s infinite linear;
+    border-radius: 16px;
+    padding: 40px;
+    margin-bottom: 24px;
+}
+
+/* ===== State messages (empty / error) ===== */
+.state-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 24px;
+    text-align: center;
+    gap: 12px;
+}
+
+.state-icon {
+    width: 64px;
+    height: 64px;
+    background-color: var(--primary-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.state-icon svg {
+    width: 32px;
+    height: 32px;
+}
+
+.state-message h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.state-message p {
+    color: var(--text-muted);
+    max-width: 360px;
+}
+
+/* ===== Dashboard inline loader / empty ===== */
+.list-loader {
+    padding: 24px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.empty-list {
+    padding: 24px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.error-text {
+    color: #ef4444;
+}
+
+/* ===== Spinner ===== */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border-color);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    flex-shrink: 0;
+}
+
+/* ===== Event detail: fact list ===== */
+.detail-fact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.detail-fact-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+    gap: 16px;
+}
+
+.detail-fact-list li:last-child {
+    border-bottom: none;
+}
+
+.fact-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.fact-label svg {
+    width: 16px;
+    height: 16px;
+}
+
+.fact-value {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--secondary);
+    text-align: right;
+}
+
+/* ===== Seats info in sidebar ===== */
+.seats-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--warning-light);
+    color: #92400e;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.85rem;
+}
+
+.seats-info svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+/* ===== event-list-item as link ===== */
+a.event-list-item {
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.15s ease;
+    border-radius: 8px;
+    margin: 0 -8px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+a.event-list-item:hover {
+    background-color: var(--bg-main);
+}
+
+/* ===== Admin Table ===== */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.admin-table th {
+    background-color: var(--bg-main);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.admin-table td {
+    color: var(--text-main);
+    font-size: 0.95rem;
+}
+
+.admin-table tbody tr {
+    transition: var(--transition);
+}
+
+.admin-table tbody tr:hover {
+    background-color: var(--bg-main);
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}

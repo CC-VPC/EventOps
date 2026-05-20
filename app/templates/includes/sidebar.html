@@ -29,21 +29,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i data-lucide="users"></i>
-                        <span>Attendees</span>
+                    <a href="/admin" class="nav-link {% if active_page == 'admin' %}active{% endif %}">
+                        <i data-lucide="lock"></i>
+                        <span>Manage Events</span>
                     </a>
                 </li>
-            </ul>
-        </div>
-        
-        <div class="nav-section">
-            <span class="nav-section-title">SETTINGS</span>
-            <ul class="nav-list">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i data-lucide="settings"></i>
-                        <span>Configuration</span>
+                    <a href="/about" class="nav-link {% if active_page == 'about' %}active{% endif %}">
+                        <i data-lucide="info"></i>
+                        <span>About</span>
                     </a>
                 </li>
             </ul>

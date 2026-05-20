@@ -21,3 +21,19 @@ async def events_page(request: Request):
 @router.get("/event/{event_id}", response_class=HTMLResponse)
 async def event_detail_page(request: Request, event_id: str):
     return templates.TemplateResponse("event_detail.html", {"request": request})
+
+@router.get("/admin", response_class=HTMLResponse)
+async def admin_page(request: Request):
+    return templates.TemplateResponse("admin.html", {"request": request})
+
+@router.get("/admin/events/new", response_class=HTMLResponse)
+async def admin_new_event(request: Request):
+    return templates.TemplateResponse("admin_form.html", {"request": request})
+
+@router.get("/admin/events/edit/{event_id}", response_class=HTMLResponse)
+async def admin_edit_event(request: Request, event_id: str):
+    return templates.TemplateResponse("admin_form.html", {"request": request})
+
+@router.get("/about", response_class=HTMLResponse)
+async def about_page(request: Request):
+    return templates.TemplateResponse("about.html", {"request": request})
