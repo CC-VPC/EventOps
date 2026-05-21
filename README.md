@@ -39,15 +39,14 @@ curl http://localhost:8000/ready
 ```
 
 ---
-
 ## Jenkins Setup
 
-### Create Docker network
+### 1. Create Docker Network
 ```bash
 docker network create jenkins
 ```
 
-### Install Jenkins via Docker
+### 2. Install and Start Jenkins
 ```bash
 docker run --name jenkins --restart=on-failure -d \
   -p 8080:8080 -p 50000:50000 \
@@ -57,13 +56,125 @@ docker run --name jenkins --restart=on-failure -d \
   jenkins/jenkins:lts-jdk21
 ```
 
-### Get initial admin password
+### 3. Get Jenkins Admin Password
 ```bash
 docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 
-- Set up a Jenkins pipeline project with a GitHub SCM trigger.
-- Use ngrok or Cloudflare Tunnel to expose Jenkins publicly, then add the URL as a GitHub webhook with content type `application/json` and trigger on `push`.
+Open:
+```text
+http://localhost:8080
+```
+
+Install suggested plugins and create the admin account.
+
+### 4. Start Existing Jenkins Container
+If Jenkins is already installed:
+
+```bash
+docker start jenkins
+```
+
+Check status:
+
+```bash
+docker ps
+```
+
+View logs:
+
+```bash
+docker logs -f jenkins
+```
+
+### 5. Expose Jenkins Using ngrok
+Start tunnel:
+
+```bash
+ngrok http 8080
+```
+
+Copy the generated HTTPS URL.
+
+Example:
+```text
+https://random-id.ngrok-free.app
+```
+
+### 6. Configure GitHub Webhook
+GitHub Repository:
+
+```text
+Settings → Webhooks → Add Webhook
+```
+
+Payload URL:
+
+```text
+https://YOUR-NGROK-URL/github-webhook/
+```
+
+Content type:
+
+```text
+application/json
+```
+
+Events:
+
+```text
+Just the push event
+```
+
+### 7. Configure Jenkins Pipeline
+Create a **Pipeline** project.
+
+Under:
+
+```text
+Pipeline → Definition
+```
+
+Select:
+
+```text
+Pipeline script from SCM
+```
+
+Choose:
+
+```text
+Git
+```
+
+Add repository URL and branch.
+
+Enable trigger:
+
+```text
+Build Triggers → GitHub hook trigger for GITScm polling
+```
+
+### 8. Verify Webhook Trigger
+Push code:
+
+```bash
+git add .
+git commit -m "update"
+git push
+```
+
+Webhook status can be checked at:
+
+```text
+GitHub → Settings → Webhooks → Recent Deliveries
+```
+
+Expected response:
+
+```text
+200 OK
+```
 
 ---
 
