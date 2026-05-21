@@ -16,7 +16,6 @@
             <span class="nav-section-title">MAIN</span>
             <ul class="nav-list">
                 <li class="nav-item">
-                    <!-- For the demo we use simple paths, in Jinja we'd pass active_page variable -->
                     <a href="/" class="nav-link {% if active_page == 'dashboard' %}active{% endif %}">
                         <i data-lucide="layout-dashboard"></i>
                         <span>Overview</span>
@@ -38,6 +37,18 @@
                     <a href="/about" class="nav-link {% if active_page == 'about' %}active{% endif %}">
                         <i data-lucide="info"></i>
                         <span>About</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="nav-section">
+            <span class="nav-section-title">DEVOPS</span>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="/status" class="nav-link {% if active_page == 'status' %}active{% endif %}">
+                        <i data-lucide="activity"></i>
+                        <span>Status</span>
                     </a>
                 </li>
             </ul>

@@ -37,3 +37,7 @@ async def admin_edit_event(request: Request, event_id: str):
 @router.get("/about", response_class=HTMLResponse)
 async def about_page(request: Request):
     return templates.TemplateResponse("about.html", {"request": request})
+
+@router.get("/status", response_class=HTMLResponse)
+async def status_page(request: Request):
+    return templates.TemplateResponse("status.html", {"request": request})
